@@ -1,11 +1,11 @@
-* VIO Trajectory compare setup tool
-** Note
+# VIO Trajectory compare setup tool
+## Note
 This script is working with evo comparision tool
 
-** The structure
+## The structure
 
 Follow the folder structure:
-
+~~~
 workspace/
 ├── auto.sh
 ├── classfication.py
@@ -34,3 +34,4 @@ workspace/
     ├── senario_3
     ├── senario_4
     └── ...
+~~~
