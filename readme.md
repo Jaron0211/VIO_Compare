@@ -34,8 +34,4 @@ workspace/
     ├── senario_3
     ├── senario_4
     └── ...
-<<<<<<< HEAD
-
-=======
 ~~~
->>>>>>> 375ec5e0a35fef41e90a2f82c47b81c393c61a05
