@@ -23,7 +23,7 @@ for folder in folders:
         for row in spamreader:
             if first_row:
                 first_row = False
-                total_result.writerow(folder)
+                total_result.writerow([folder] + [] + row)
                 continue
             total_result.writerow(row)
 
