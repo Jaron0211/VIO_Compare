@@ -1,21 +1,24 @@
 #! /bin/sh
 
 algorithm=$1
+echo $algorithm
 
 launch_command=""
 
 
-if [ $algorithm=="vins" ]
+if [ $algorithm == "vins" ]
 then
 	launch_command="rosrun vins vins_node /home/jaron/catkin_ws/src/VINS-Fusion-gpu/config/euroc/euroc_stereo_imu_config.yaml"
-elif [ $algorithm=="dgvins" ]
+elif [ $algorithm == "dgvins" ]
 then
 	launch_command="roslaunch dgvins euroc.launch"
-elif [ $algorithm=="dynaVINS" ]
+elif [ $algorithm == "dynaVINS" ]
 then
 	launch_command="roslaunch dynaVINS euroc.launch"
 fi
-	
+
+echo $launch_command
+
 #start roscore
 gnome-terminal --tab --title="roscore" -- bash -c "roscore; exec bash" &
 sleep 3 
@@ -46,7 +49,20 @@ do
 	sleep 5
 	filename=${bag/.//}
 	echo $filename
-	mv ~/vins_output/dgvins_vio.csv ~/vins_output/${algorithm}_${filename////}_vio.csv 
+	
+	if [ $algorithm == "vins" ]
+	then
+		mv ~/vins_output/vio.csv ~/vins_output/${algorithm}_${filename////}_vio.csv 
+	elif [ $algorithm == "dgvins" ]
+	then
+		mv ~/vins_output/dgvins_vio.csv ~/vins_output/${algorithm}_${filename////}_vio.csv
+		mv ~/vins_output/dgvins_vio.csvVisual_residual.txt ~/vins_output/${algorithm}_${filename////}_vioResidual.csv 
+	elif [ $algorithm == "dynaVINS" ]
+	then
+		mv ~/vins_output/vio.csv ~/vins_output/${algorithm}_${filename////}_vio.csv 
+	fi
+	
+	#mv ~/vins_output/dgvins_vio.csv ~/vins_output/${algorithm}_${filename////}_vio.csv 
 	#mv ~/vins_output/dgvins_vio.csvVisual_residual.txt ~/vins_output/${algorithm}_${filename////}_Visual_residual.txt 
 
 done
