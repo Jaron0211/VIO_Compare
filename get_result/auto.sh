@@ -32,13 +32,12 @@ mkdir ape_results
 if test -d ./tum; 
 then
 	cd tum
-	rm -v  !(data.tum)
+	rm -f $(ls -I "data.tum" )
 else
 	mkdir tum
+	cd tum
 fi
 
-cd tum
-rm -- !(data.tum)
 
 evo_traj euroc ../csv/*.csv --save_as_tum
 
@@ -58,5 +57,5 @@ do
 done
 
 cd ..
-/bin/sh -ec "evo_res ape_results/*.zip -p --save_table ape_results/table.csv"
-/bin/sh -ec "evo_res rpe_results/*.zip -p --save_table rpe_results/table.csv" 
+/bin/sh -ec "evo_config set save_traj_in_zip true ; evo_res ape_results/*.zip --save_table ape_results/table.csv --save_plot ape_results/tableplot.pdf"
+/bin/sh -ec "evo_config set save_traj_in_zip true ; evo_res rpe_results/*.zip --save_table rpe_results/table.csv --save_plot rpe_results/tableplot.pdf" 

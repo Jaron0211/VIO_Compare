@@ -24,7 +24,8 @@ gnome-terminal --tab --title="roscore" -- bash -c "roscore; exec bash" &
 sleep 3 
 
 #prepare euroc dataset
-cd /media/jaron/DATA/experiment_data/VIO_Dataset/VIODE/bag
+cd /media/jaron/DATA/experiment_data/VIO_Dataset/VIODE/bag/
+
 folder_list="./*"
 echo ${folder_list}
 
@@ -38,12 +39,13 @@ do
 	for bag in ${files}
 	do
 
-		gnome-terminal --tab --title="$algorithm" -- bash -c "${launch_command}" &
+		gnome-terminal --tab --title="$algorithm" -- bash -c "${lauh_command}" &
 		sleep 5
 		vio_pid=$(pgrep ${algorithm})
 		command="rosbag play /media/jaron/DATA/experiment_data/VIO_Dataset/VIODE/bag/${folder/"./"/}/${bag/"./"/}"
 		echo $command
 		gnome-terminal --tab --title="rosbag" -- bash -c "${command}; kill -- -$pid; kill -- -$vio_pid"
+
 		pid=$(pgrep rosbag)
 		echo $pid
 		

@@ -36,7 +36,7 @@ do
 	sleep 5
 	vio_pid=$(pgrep ${algorithm})
 	command="rosbag play /media/jaron/DATA/experiment_data/VIO_Dataset/EuRoC/bag/${bag/.//}"
-	gnome-terminal --tab --title="rosbag" -- bash -c "${command}; kill -- -$pid; kill -- -$vio_pid"
+	gnome-terminal --tab --title="rosbag" -- bash -c "${command}"
 	pid=$(pgrep rosbag)
 	echo $pid
 	
@@ -45,6 +45,9 @@ do
 	    sleep 3
 	    # You can add a timeout here if you want
 	done
+	
+	sleep 30
+	gnome-terminal --tab --title="killSwitch" -- bash -c "kill -- -$pid; kill -- -$vio_pid"
 	
 	sleep 5
 	filename=${bag/.//}

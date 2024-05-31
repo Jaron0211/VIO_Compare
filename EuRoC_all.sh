@@ -1,8 +1,8 @@
 cd /home/jaron/workspace/VIO_Compare
-source euroc_compare.sh VINS-Fusion
+source euroc_compare.sh vins
 
 cd /home/jaron/workspace/VIO_Compare
-source euroc_compare.sh DGVINS
+source euroc_compare.sh dgvins
 
 cd /home/jaron/workspace/VIO_Compare
 source euroc_compare.sh dynaVINS
